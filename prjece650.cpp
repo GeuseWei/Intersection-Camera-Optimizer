@@ -202,7 +202,7 @@ void get_edges(string coordinate) {
 std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
 {
     std::vector<int> res;
-    std::vector<std::vector<int>> matrix(V, std::vector<int>(V, 0));
+    std::vector<std::vector<bool>> matrix(V, std::vector<bool>(V, 0));
     std::vector<int> range(V);
     std::iota(range.begin(), range.end(), 0);
     for (short int i = 0; i < edges.size(); i++)
