@@ -2,6 +2,8 @@
 #include <vector>
 #include <sstream>
 #include <minisat/core/Solver.h>
+#include <numeric>
+#include <algorithm>
 
 using namespace std;
 
@@ -197,6 +199,59 @@ void get_edges(string coordinate) {
 
 }
 
+std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
+{
+    std::vector<int> res;
+    std::vector<std::vector<int>> matrix(V, std::vector<int>(V, 0));
+    std::vector<int> range(V);
+    std::iota(range.begin(), range.end(), 0);
+    for (short int i = 0; i < edges.size(); i++)
+    {
+        int j = edges[i].first;
+        int k = edges[i].second;
+        matrix[j][k] = true;
+        matrix[k][j] = true;
+    }
+    //     for (const auto& inner_vec : matrix) {
+    //     for (const auto& val : inner_vec) {
+    //         std::cout << val << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+    for (short int i : range)
+    {
+        for (short int j : range)
+        {
+            if (matrix[i][j] == true)
+            {
+                res.push_back(i);
+                res.push_back(j);
+                matrix[i][j] = false;
+                matrix[j][i] = false;
+                int iter = 0;
+                while (iter < V)
+                {
+                    matrix[i][iter] = false;
+                    matrix[j][iter] = false;
+                    matrix[iter][i] = false;
+                    matrix[iter][j] = false;
+                    iter++;
+                }
+                // for (int i = 0; i < matrix.size(); i++) {
+                //         for (int j = 0; j < matrix[i].size(); j++) {
+                //             std::cout << matrix[i][j] << " ";
+
+                //         }
+                //         std::cout << std::endl;
+                //     }
+                // std::cout << std::endl;
+            }
+        }
+    }
+    std::sort(res.begin(), res.end());
+
+    return res;
+}
 
 int main() {
     string input;
