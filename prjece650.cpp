@@ -328,6 +328,78 @@ void get_edges(string coordinate) {
 
 }
 
+bool checkMinVertCov(int V, std::vector<int> arr, std::vector<std::vector<int>> matrix)      // PaRT OF REFAPPROXVC2
+{
+    std::vector<std::vector<int>> tempMatrix = matrix;
+    for (int i = 0; i < V; i++)
+    {
+        for (int j = 0; j < V; j++)
+        {
+            if (tempMatrix[i][j] == true && std::find(arr.begin(), arr.end(), i) == arr.end() &&
+                std::find(arr.begin(), arr.end(), j) == arr.end())
+            {
+                tempMatrix[i][j] = false;
+            }
+        }
+    }
+    //   for (const auto& inner_vec : tempMatrix) {
+    //         for (const auto& val : inner_vec) {
+    //             std::cout << val << " ";
+    //         }
+    //         std::cout << std::endl;
+    //     }
+    //      std::cout << std::endl;
+    if (tempMatrix.size() != matrix.size())
+    {
+        return false;
+    }
+    for (size_t i = 0; i < tempMatrix.size(); ++i)
+    {
+        if (tempMatrix[i] != matrix[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+std::vector<int> refapproxvc2(int V,std::vector<std::pair<int, int>> edges,std::vector<int> arr )
+{   std::vector<std::vector<int>> matrix(V, std::vector<int>(V, 0));
+    for (short int i = 0; i < edges.size(); i++)
+    {
+        int j = edges[i].first;
+        int k = edges[i].second;
+        matrix[j][k] = true;
+        matrix[k][j] = true;
+    }
+
+    int iter = 0;
+    int size = arr.size();
+    for (int i = 0; i < size; i++)
+    {
+        int flag = 0;
+        int temp;
+        temp = arr.at(iter);
+        arr.erase(arr.begin() + iter);
+
+        if (checkMinVertCov(V, arr, matrix))
+        {
+            flag++;
+        }
+        if (flag == 0)
+        {
+            arr.insert(arr.begin() + iter, temp);
+            iter++;
+        }
+    }
+    // for (int j : arr)
+    // {
+    //     std::cout << j << " ";
+    // }
+    // std::cout << std::endl;
+    return arr;
+}
+
 int main() {
     string input;
     string initial;
