@@ -4,11 +4,25 @@
 #include <minisat/core/Solver.h>
 #include <numeric>
 #include <algorithm>
+#include <set>
 
 using namespace std;
 
 int vertices;
 vector< pair<int,int> > edges;
+
+vector<vector<int>> get_adj(int v, vector< pair<int,int> > e){
+    vector<vector<int>> adj(v);
+
+    for(int i=0;i<v;i++)
+        adj[i].resize(v);
+
+    for(auto& j: e){
+        adj[j.first][j.second] = 1;
+        adj[j.second][j.first] = 1;
+    }
+    return adj;
+}
 
 bool cnf(Minisat::Solver& solver, int k) {
     for (int i = 0; i < vertices * k; i++)
@@ -111,6 +125,110 @@ bool cnf_3(Minisat::Solver& solver, int k) {
     return solver.solve();
 }
 
+set<int> approxvc1(){
+    vector<vector<int>> adj(vertices);
+    set<int> cover_set;
+    adj = get_adj(vertices, edges);
+    while(true){
+        int max_degree = 0;
+        int max_vertex = -1;
+        for(int i=0; i<vertices; i++){
+            int degree = 0;
+            for(int j=0; j<vertices; j++)
+                if(adj[i][j] == 1)
+                    degree++;
+            if(degree > max_degree){
+                max_vertex = i;
+                max_degree = degree;
+            }
+        }
+        if(max_vertex == -1)
+            break;
+        cover_set.insert(max_vertex);
+        for(int k=0; k<vertices; k++){
+            adj[max_vertex][k] = 0;
+            adj[k][max_vertex] = 0;
+        }
+    }
+    return cover_set;
+}
+
+set<int> refined_approxvc1(){
+    vector<vector<int>> adj(vertices);
+    adj = get_adj(vertices, edges);
+    set<int> cover_set = approxvc1();
+    set<int> unnecessary;
+    for (int vertex : cover_set) {
+        cover_set.erase(vertex);
+
+        bool isCover = true;
+        for (int i=0; i<vertices; i++) {
+            if(adj[vertex][i] == 1)
+                if (cover_set.find(i) == cover_set.end()) {
+                    isCover = false;
+                    break;
+                }
+        }
+        if (!isCover) {
+            cover_set.insert(vertex);
+        } else {
+            unnecessary.insert(vertex);
+        }
+    }
+    for (int vertex : unnecessary) {
+        cover_set.erase(vertex);
+    }
+    return cover_set;
+}
+
+std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
+{
+    std::vector<int> res;
+    std::vector<int> range(V);
+    std::iota(range.begin(), range.end(), 0);
+    vector<vector<int>> matrix(vertices);
+    matrix = get_adj(vertices, edges);
+    //     for (const auto& inner_vec : matrix) {
+    //     for (const auto& val : inner_vec) {
+    //         std::cout << val << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+    for (short int i : range)
+    {
+        for (short int j : range)
+        {
+            if (matrix[i][j] == 1)
+            {
+                res.push_back(i);
+                res.push_back(j);
+                matrix[i][j] = 0;
+                matrix[j][i] = 0;
+                int iter = 0;
+                while (iter < V)
+                {
+                    matrix[i][iter] = 0;
+                    matrix[j][iter] = 0;
+                    matrix[iter][i] = 0;
+                    matrix[iter][j] = 0;
+                    iter++;
+                }
+              /*   for (int i = 0; i < matrix.size(); i++) {
+                         for (int j = 0; j < matrix[i].size(); j++) {
+                             std::cout << matrix[i][j] << " ";
+
+                         }
+                         std::cout << std::endl;
+                     }
+                 std::cout << std::endl; */
+            }
+        }
+    }
+    std::sort(res.begin(), res.end());
+
+    return res;
+}
+
 vector<int> get_vertex_cover(Minisat::Solver& solver, int k) {
     vector<int> vertex_cover;
     for (int row = 0; row < vertices; row++)
@@ -161,6 +279,17 @@ void minimal(int approach) {
     }
 }
 
+void print_set(set<int> s){
+    int count = 0;
+    for (auto it = s.begin(); it != s.end(); ++it) {
+        cout << *it;
+        if (++count != s.size()) {
+            cout << " ";
+        }
+    }
+    cout << endl;
+}
+
 void get_edges(string coordinate) {
     edges.clear();
     string x,y;
@@ -199,60 +328,6 @@ void get_edges(string coordinate) {
 
 }
 
-std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
-{
-    std::vector<int> res;
-    std::vector<std::vector<bool>> matrix(V, std::vector<bool>(V, 0));
-    std::vector<int> range(V);
-    std::iota(range.begin(), range.end(), 0);
-    for (short int i = 0; i < edges.size(); i++)
-    {
-        int j = edges[i].first;
-        int k = edges[i].second;
-        matrix[j][k] = true;
-        matrix[k][j] = true;
-    }
-    //     for (const auto& inner_vec : matrix) {
-    //     for (const auto& val : inner_vec) {
-    //         std::cout << val << " ";
-    //     }
-    //     std::cout << std::endl;
-    // }
-    for (short int i : range)
-    {
-        for (short int j : range)
-        {
-            if (matrix[i][j] == true)
-            {
-                res.push_back(i);
-                res.push_back(j);
-                matrix[i][j] = false;
-                matrix[j][i] = false;
-                int iter = 0;
-                while (iter < V)
-                {
-                    matrix[i][iter] = false;
-                    matrix[j][iter] = false;
-                    matrix[iter][i] = false;
-                    matrix[iter][j] = false;
-                    iter++;
-                }
-                // for (int i = 0; i < matrix.size(); i++) {
-                //         for (int j = 0; j < matrix[i].size(); j++) {
-                //             std::cout << matrix[i][j] << " ";
-
-                //         }
-                //         std::cout << std::endl;
-                //     }
-                // std::cout << std::endl;
-            }
-        }
-    }
-    std::sort(res.begin(), res.end());
-
-    return res;
-}
-
 int main() {
     string input;
     string initial;
@@ -280,6 +355,15 @@ int main() {
                 get_edges(coordinate);
                 minimal(0); // print CNF-SAT-VC
                 minimal(1); // print CNF-3-SAT-VC
+                cout << "APPROX-VC-1: ";
+                print_set(approxvc1());
+                vector<int> vc2 = approxvc2(vertices, edges);
+                cout << "APPROX-VC-2: ";
+                for(int i=0; i < vc2.size()-1; i++)
+                    cout << vc2[i] << " ";
+                cout << vc2[vc2.size()-1] << endl;
+                cout << "REFINED-APPROX-VC-1: ";
+                print_set(refined_approxvc1());
             }
         }
     }
