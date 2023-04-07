@@ -17,10 +17,13 @@ set (CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
 # expose minisat header files
 include_directories(${CMAKE_SOURCE_DIR}/minisat)
 
+find_package (Threads)
+
 # create the main executable
 ## add additional .cpp files if needed
 add_executable(prjece650 prjece650.cpp)
 # link MiniSAT libraries
 target_link_libraries(prjece650 minisat-lib-static)
+target_link_libraries (prjece650 ${CMAKE_THREAD_LIBS_INIT})
 
 

@@ -5,11 +5,16 @@
 #include <numeric>
 #include <algorithm>
 #include <set>
+#include <pthread.h>
 
 using namespace std;
 
 int vertices;
 vector< pair<int,int> > edges;
+pthread_t io_thread, cnf_thread, cnf_3_thread, vc_1_thread, refined_vc_1_thread, vc_2_thread, refined_vc_2_thread;
+long long  cnf_thread_time, cnf_3_thread_time, vc_1_thread_time, refined_vc_1_thread_time, vc_2_thread_time, refined_vc_2_thread_time;
+vector<int> cnf_result, cnf_3_result, vc2_result, refined_vc2_result;
+set<int> vc1_result, refined_vc1_result;
 
 vector<vector<int>> get_adj(int v, vector< pair<int,int> > e){
     vector<vector<int>> adj(v);
@@ -181,19 +186,13 @@ set<int> refined_approxvc1(){
     return cover_set;
 }
 
-std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
+vector<int> approxvc2()
 {
-    std::vector<int> res;
-    std::vector<int> range(V);
-    std::iota(range.begin(), range.end(), 0);
+    vector<int> res;
+    vector<int> range(vertices);
+    iota(range.begin(), range.end(), 0);
     vector<vector<int>> matrix(vertices);
     matrix = get_adj(vertices, edges);
-    //     for (const auto& inner_vec : matrix) {
-    //     for (const auto& val : inner_vec) {
-    //         std::cout << val << " ";
-    //     }
-    //     std::cout << std::endl;
-    // }
     for (short int i : range)
     {
         for (short int j : range)
@@ -205,7 +204,7 @@ std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
                 matrix[i][j] = 0;
                 matrix[j][i] = 0;
                 int iter = 0;
-                while (iter < V)
+                while (iter < vertices)
                 {
                     matrix[i][iter] = 0;
                     matrix[j][iter] = 0;
@@ -213,20 +212,67 @@ std::vector<int> approxvc2(int V, std::vector<std::pair<int, int>> edges)
                     matrix[iter][j] = 0;
                     iter++;
                 }
-              /*   for (int i = 0; i < matrix.size(); i++) {
-                         for (int j = 0; j < matrix[i].size(); j++) {
-                             std::cout << matrix[i][j] << " ";
-
-                         }
-                         std::cout << std::endl;
-                     }
-                 std::cout << std::endl; */
             }
         }
     }
-    std::sort(res.begin(), res.end());
+    sort(res.begin(), res.end());
 
     return res;
+}
+
+bool checkMinVertCov(int V, vector<int> arr, vector<vector<int>> matrix)      // PaRT OF REFAPPROXVC2
+{
+    vector<vector<int>> tempMatrix = matrix;
+    for (int i = 0; i < V; i++)
+    {
+        for (int j = 0; j < V; j++)
+        {
+            if (tempMatrix[i][j] == 1 && find(arr.begin(), arr.end(), i) == arr.end() &&
+                find(arr.begin(), arr.end(), j) == arr.end())
+            {
+                tempMatrix[i][j] = 0;
+            }
+        }
+    }
+    if (tempMatrix.size() != matrix.size())
+    {
+        return false;
+    }
+    for (size_t i = 0; i < tempMatrix.size(); ++i)
+    {
+        if (tempMatrix[i] != matrix[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+vector<int> refined_approxvc2()
+{
+    vector<int> arr = approxvc2();
+    vector<vector<int>> matrix(vertices);
+    matrix = get_adj(vertices, edges);
+    int iter = 0;
+    int size = arr.size();
+    for (int i = 0; i < size; i++)
+    {
+        int flag = 0;
+        int temp;
+        temp = arr.at(iter);
+        arr.erase(arr.begin() + iter);
+
+        if (checkMinVertCov(vertices, arr, matrix))
+        {
+            flag++;
+        }
+        if (flag == 0)
+        {
+            arr.insert(arr.begin() + iter, temp);
+            iter++;
+        }
+    }
+    return arr;
 }
 
 vector<int> get_vertex_cover(Minisat::Solver& solver, int k) {
@@ -238,7 +284,7 @@ vector<int> get_vertex_cover(Minisat::Solver& solver, int k) {
     return vertex_cover;
 }
 
-void minimal(int approach) {
+vector<int> minimal(int approach) {
     int vertex_result[vertices];
     vector<int> minimal_vertex_cover;
     for(int i = 0; i< vertices; i++)
@@ -251,12 +297,7 @@ void minimal(int approach) {
             vertex_result[i] = cnf(solver, i);
             if (vertex_result[i]) {
                 minimal_vertex_cover = get_vertex_cover(solver, i);
-                size_t vertex_num = minimal_vertex_cover.size();
-                cout << "CNF-SAT-VC: ";
-                for (int j = 0; j< vertex_num - 1; j++)
-                    cout << minimal_vertex_cover[j] << " ";
-                cout << minimal_vertex_cover[vertex_num - 1] << endl;
-                return;
+                return minimal_vertex_cover;
             }
         }
     }
@@ -268,12 +309,7 @@ void minimal(int approach) {
             vertex_result[i] = cnf_3(solver, i);
             if (vertex_result[i]) {
                 minimal_vertex_cover = get_vertex_cover(solver, i);
-                size_t vertex_num = minimal_vertex_cover.size();
-                cout << "CNF-3-SAT-VC: ";
-                for (int j = 0; j< vertex_num - 1; j++)
-                    cout << minimal_vertex_cover[j] << " ";
-                cout << minimal_vertex_cover[vertex_num - 1] << endl;
-                return;
+                return minimal_vertex_cover;
             }
         }
     }
@@ -288,6 +324,12 @@ void print_set(set<int> s){
         }
     }
     cout << endl;
+}
+
+void print_vector(vector<int> v){
+    for(int i=0; i < v.size()-1; i++)
+        cout << v[i] << " ";
+    cout << v[v.size()-1] << endl;
 }
 
 void get_edges(string coordinate) {
@@ -328,79 +370,40 @@ void get_edges(string coordinate) {
 
 }
 
-bool checkMinVertCov(int V, std::vector<int> arr, std::vector<std::vector<int>> matrix)      // PaRT OF REFAPPROXVC2
+
+void *cnf_thread_handler(void *arg){
+    cnf_result = minimal(0);
+    return nullptr;
+}
+
+void *cnf_3_thread_handler(void *arg){
+    cnf_3_result = minimal(1);
+    return nullptr;
+}
+
+void *vc_1_thread_handler(void *arg){
+    vc1_result = approxvc1();
+    return nullptr;
+}
+
+void *refined_vc_1_thread_handler(void *arg){
+    refined_vc1_result = refined_approxvc1();
+    return nullptr;
+}
+
+void *vc_2_thread_handler(void *arg)
 {
-    std::vector<std::vector<int>> tempMatrix = matrix;
-    for (int i = 0; i < V; i++)
-    {
-        for (int j = 0; j < V; j++)
-        {
-            if (tempMatrix[i][j] == true && std::find(arr.begin(), arr.end(), i) == arr.end() &&
-                std::find(arr.begin(), arr.end(), j) == arr.end())
-            {
-                tempMatrix[i][j] = false;
-            }
-        }
-    }
-    //   for (const auto& inner_vec : tempMatrix) {
-    //         for (const auto& val : inner_vec) {
-    //             std::cout << val << " ";
-    //         }
-    //         std::cout << std::endl;
-    //     }
-    //      std::cout << std::endl;
-    if (tempMatrix.size() != matrix.size())
-    {
-        return false;
-    }
-    for (size_t i = 0; i < tempMatrix.size(); ++i)
-    {
-        if (tempMatrix[i] != matrix[i])
-        {
-            return false;
-        }
-    }
-    return true;
+    vc2_result = approxvc2();
+    return nullptr;
 }
 
-std::vector<int> refapproxvc2(int V,std::vector<std::pair<int, int>> edges,std::vector<int> arr )
-{   std::vector<std::vector<int>> matrix(V, std::vector<int>(V, 0));
-    for (short int i = 0; i < edges.size(); i++)
-    {
-        int j = edges[i].first;
-        int k = edges[i].second;
-        matrix[j][k] = true;
-        matrix[k][j] = true;
-    }
-
-    int iter = 0;
-    int size = arr.size();
-    for (int i = 0; i < size; i++)
-    {
-        int flag = 0;
-        int temp;
-        temp = arr.at(iter);
-        arr.erase(arr.begin() + iter);
-
-        if (checkMinVertCov(V, arr, matrix))
-        {
-            flag++;
-        }
-        if (flag == 0)
-        {
-            arr.insert(arr.begin() + iter, temp);
-            iter++;
-        }
-    }
-    // for (int j : arr)
-    // {
-    //     std::cout << j << " ";
-    // }
-    // std::cout << std::endl;
-    return arr;
+void *refined_vc_2_thread_handler(void *arg)
+{
+    refined_vc2_result = refined_approxvc2();
+    return nullptr;
 }
 
-int main() {
+void *input_output_thread_handler(void *arg) {
     string input;
     string initial;
 
@@ -418,25 +421,47 @@ int main() {
 
         if (initial == "E") {
             string coordinate;
-            string c;
-            while (split >> c)
-                coordinate += c;
-            if (coordinate == "{}")
-                cout << "";
-            else {
-                get_edges(coordinate);
-                minimal(0); // print CNF-SAT-VC
-                minimal(1); // print CNF-3-SAT-VC
-                cout << "APPROX-VC-1: ";
-                print_set(approxvc1());
-                vector<int> vc2 = approxvc2(vertices, edges);
-                cout << "APPROX-VC-2: ";
-                for(int i=0; i < vc2.size()-1; i++)
-                    cout << vc2[i] << " ";
-                cout << vc2[vc2.size()-1] << endl;
-                cout << "REFINED-APPROX-VC-1: ";
-                print_set(refined_approxvc1());
-            }
+            split >> coordinate;
+            get_edges(coordinate);
+
+
+            pthread_create(&cnf_thread, nullptr, &cnf_thread_handler, nullptr);
+            pthread_create(&cnf_3_thread, nullptr, &cnf_3_thread_handler, nullptr);
+            pthread_create(&vc_1_thread, nullptr, &vc_1_thread_handler, nullptr);
+            pthread_create(&refined_vc_1_thread, nullptr, &refined_vc_1_thread_handler, nullptr);
+            pthread_create(&vc_2_thread, nullptr, &vc_2_thread_handler, nullptr);
+            pthread_create(&refined_vc_2_thread, nullptr, &refined_vc_2_thread_handler, nullptr);
+
+            pthread_join(cnf_thread, nullptr);
+            pthread_join(cnf_3_thread, nullptr);
+            pthread_join(vc_1_thread, nullptr);
+            pthread_join(refined_vc_1_thread, nullptr);
+            pthread_join(vc_2_thread, nullptr);
+            pthread_join(refined_vc_2_thread, nullptr);
+
+            cout << "CNF-SAT-VC: ";
+            print_vector(cnf_result);
+            cout << "CNF-3-SAT-VC: ";
+            print_vector(cnf_3_result);
+            cout << "APPROX-VC-1: ";
+            print_set(vc1_result);
+            cout << "APPROX-VC-2: ";
+            print_vector(vc2_result);
+            cout << "REFINED-APPROX-VC-1: ";
+            print_set(refined_vc1_result);
+            cout << "REFINED-APPROX-VC-2: ";
+            print_vector(refined_vc2_result);
         }
+    }
+    return nullptr;
+}
+
+
+int main() {
+    int retcode;
+    pthread_create(&io_thread, nullptr, &input_output_thread_handler, nullptr);
+    retcode = pthread_join(io_thread, nullptr);
+    if (retcode){
+        return 0;
     }
 }
