@@ -6,13 +6,13 @@
 #include <algorithm>
 #include <set>
 #include <pthread.h>
+#include <ctime>
 
 using namespace std;
 
 int vertices;
 vector< pair<int,int> > edges;
 pthread_t io_thread, cnf_thread, cnf_3_thread, vc_1_thread, refined_vc_1_thread, vc_2_thread, refined_vc_2_thread;
-long long  cnf_thread_time, cnf_3_thread_time, vc_1_thread_time, refined_vc_1_thread_time, vc_2_thread_time, refined_vc_2_thread_time;
 vector<int> cnf_result, cnf_3_result, vc2_result, refined_vc2_result;
 set<int> vc1_result, refined_vc1_result;
 
@@ -370,37 +370,117 @@ void get_edges(string coordinate) {
 
 }
 
-
 void *cnf_thread_handler(void *arg){
+    clockid_t clock_id;
+    pthread_getcpuclockid(pthread_self(), &clock_id);
+
+    timespec start_time{};
+    clock_gettime(clock_id, &start_time);
+
     cnf_result = minimal(0);
-    return nullptr;
+
+    timespec end_time{};
+    clock_gettime(clock_id, &end_time);
+
+    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+    //printf("%lld\n", elapsed_us);
+    printf("CNF thread elapsed time: %lld us\n", elapsed_us);
+    pthread_exit(nullptr);
 }
 
 void *cnf_3_thread_handler(void *arg){
+    clockid_t clock_id;
+    pthread_getcpuclockid(pthread_self(), &clock_id);
+
+    timespec start_time{};
+    clock_gettime(clock_id, &start_time);
+
     cnf_3_result = minimal(1);
-    return nullptr;
+
+    timespec end_time{};
+    clock_gettime(clock_id, &end_time);
+
+    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+    //printf("%lld\n", elapsed_us);
+    printf("CNF-3 thread elapsed time: %lld us\n", elapsed_us);
+
+    pthread_exit(nullptr);
 }
 
 void *vc_1_thread_handler(void *arg){
+    clockid_t clock_id;
+    pthread_getcpuclockid(pthread_self(), &clock_id);
+
+    timespec start_time{};
+    clock_gettime(clock_id, &start_time);
+
     vc1_result = approxvc1();
-    return nullptr;
+
+    timespec end_time{};
+    clock_gettime(clock_id, &end_time);
+
+    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+   // printf("%lld\n", elapsed_us);
+    printf("VC-1 thread elapsed time: %lld us\n", elapsed_us);
+
+    pthread_exit(nullptr);
 }
 
 void *refined_vc_1_thread_handler(void *arg){
+    clockid_t clock_id;
+    pthread_getcpuclockid(pthread_self(), &clock_id);
+
+    timespec start_time{};
+    clock_gettime(clock_id, &start_time);
+
     refined_vc1_result = refined_approxvc1();
-    return nullptr;
+
+    timespec end_time{};
+    clock_gettime(clock_id, &end_time);
+
+    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+   // printf("%lld\n", elapsed_us);
+   printf("REFINED-VC-1 thread elapsed time: %lld us\n", elapsed_us);
+
+    pthread_exit(nullptr);
 }
 
 void *vc_2_thread_handler(void *arg)
 {
+    clockid_t clock_id;
+    pthread_getcpuclockid(pthread_self(), &clock_id);
+
+    timespec start_time{};
+    clock_gettime(clock_id, &start_time);
+
     vc2_result = approxvc2();
-    return nullptr;
+
+    timespec end_time{};
+    clock_gettime(clock_id, &end_time);
+
+    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+    printf("VC-2 thread elapsed time: %lld us\n", elapsed_us);
+
+    pthread_exit(nullptr);
 }
 
 void *refined_vc_2_thread_handler(void *arg)
 {
+    clockid_t clock_id;
+    pthread_getcpuclockid(pthread_self(), &clock_id);
+
+    timespec start_time{};
+    clock_gettime(clock_id, &start_time);
+
     refined_vc2_result = refined_approxvc2();
-    return nullptr;
+
+    timespec end_time{};
+    clock_gettime(clock_id, &end_time);
+
+    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+    printf("REFINED-VC-2 thread elapsed time: %lld us\n", elapsed_us);
+
+    pthread_exit(nullptr);
 }
 
 void *input_output_thread_handler(void *arg) {
@@ -423,7 +503,6 @@ void *input_output_thread_handler(void *arg) {
             string coordinate;
             split >> coordinate;
             get_edges(coordinate);
-
 
             pthread_create(&cnf_thread, nullptr, &cnf_thread_handler, nullptr);
             pthread_create(&cnf_3_thread, nullptr, &cnf_3_thread_handler, nullptr);
@@ -451,11 +530,11 @@ void *input_output_thread_handler(void *arg) {
             print_set(refined_vc1_result);
             cout << "REFINED-APPROX-VC-2: ";
             print_vector(refined_vc2_result);
+
         }
     }
     return nullptr;
 }
-
 
 int main() {
     int retcode;
