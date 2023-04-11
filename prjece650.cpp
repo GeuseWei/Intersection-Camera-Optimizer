@@ -15,6 +15,8 @@ vector< pair<int,int> > edges;
 pthread_t io_thread, cnf_thread, cnf_3_thread, vc_1_thread, refined_vc_1_thread, vc_2_thread, refined_vc_2_thread;
 vector<int> cnf_result, cnf_3_result, vc2_result, refined_vc2_result;
 set<int> vc1_result, refined_vc1_result;
+bool cnf_thread_status, cnf_thread_timeout = false;
+bool cnf_3_thread_status, cnf_3_thread_timeout = false;
 
 vector<vector<int>> get_adj(int v, vector< pair<int,int> > e){
     vector<vector<int>> adj(v);
@@ -163,7 +165,8 @@ set<int> refined_approxvc1(){
     adj = get_adj(vertices, edges);
     set<int> cover_set = approxvc1();
     set<int> unnecessary;
-    for (int vertex : cover_set) {
+    set<int> temp_cover = cover_set;
+    for (int vertex : temp_cover) {
         cover_set.erase(vertex);
 
         bool isCover = true;
@@ -180,6 +183,7 @@ set<int> refined_approxvc1(){
             unnecessary.insert(vertex);
         }
     }
+
     for (int vertex : unnecessary) {
         cover_set.erase(vertex);
     }
@@ -293,6 +297,8 @@ vector<int> minimal(int approach) {
     // print CNF-SAT-VC
     if (approach == 0){
         for (int i = 0; i <= vertices; i++) {
+            if(cnf_thread_timeout)
+                break;
             Minisat::Solver solver;
             vertex_result[i] = cnf(solver, i);
             if (vertex_result[i]) {
@@ -305,6 +311,8 @@ vector<int> minimal(int approach) {
     // print CNF-3-SAT-VC
     if (approach == 1){
         for (int i = 0; i <= vertices; i++) {
+            if(cnf_3_thread_timeout)
+                break;
             Minisat::Solver solver;
             vertex_result[i] = cnf_3(solver, i);
             if (vertex_result[i]) {
@@ -375,17 +383,26 @@ void *cnf_thread_handler(void *arg){
     pthread_getcpuclockid(pthread_self(), &clock_id);
 
     timespec start_time{};
+    cnf_thread_status = true;
     clock_gettime(clock_id, &start_time);
 
     cnf_result = minimal(0);
 
-    timespec end_time{};
-    clock_gettime(clock_id, &end_time);
+    if(!cnf_thread_timeout){
+        timespec end_time{};
+        clock_gettime(clock_id, &end_time);
 
-    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
-    //printf("%lld\n", elapsed_us);
-    printf("CNF thread elapsed time: %lld us\n", elapsed_us);
-    pthread_exit(nullptr);
+        long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+        // printf("%lld\n", elapsed_us);
+        //printf("CNF thread elapsed time: %lld us\n", elapsed_us);
+        cnf_thread_status = false;
+        pthread_exit(nullptr);
+    }
+    else{
+        cnf_thread_status = false;
+        pthread_exit(nullptr);
+    }
+
 }
 
 void *cnf_3_thread_handler(void *arg){
@@ -393,18 +410,24 @@ void *cnf_3_thread_handler(void *arg){
     pthread_getcpuclockid(pthread_self(), &clock_id);
 
     timespec start_time{};
+    cnf_3_thread_status = true;
     clock_gettime(clock_id, &start_time);
 
     cnf_3_result = minimal(1);
 
-    timespec end_time{};
-    clock_gettime(clock_id, &end_time);
+    if(!cnf_3_thread_timeout){
+        timespec end_time{};
+        clock_gettime(clock_id, &end_time);
 
-    long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
-    //printf("%lld\n", elapsed_us);
-    printf("CNF-3 thread elapsed time: %lld us\n", elapsed_us);
-
-    pthread_exit(nullptr);
+        long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
+        //printf("CNF-3 thread elapsed time: %lld us\n", elapsed_us);
+        cnf_3_thread_status = false;
+        pthread_exit(nullptr);
+    }
+    else{
+        cnf_3_thread_status = false;
+        pthread_exit(nullptr);
+    }
 }
 
 void *vc_1_thread_handler(void *arg){
@@ -420,8 +443,8 @@ void *vc_1_thread_handler(void *arg){
     clock_gettime(clock_id, &end_time);
 
     long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
-   // printf("%lld\n", elapsed_us);
-    printf("VC-1 thread elapsed time: %lld us\n", elapsed_us);
+     //printf("%lld\n", elapsed_us);
+   // printf("VC-1 thread elapsed time: %lld us\n", elapsed_us);
 
     pthread_exit(nullptr);
 }
@@ -439,8 +462,8 @@ void *refined_vc_1_thread_handler(void *arg){
     clock_gettime(clock_id, &end_time);
 
     long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
-   // printf("%lld\n", elapsed_us);
-   printf("REFINED-VC-1 thread elapsed time: %lld us\n", elapsed_us);
+    //printf("%lld\n", elapsed_us);
+   // printf("REFINED-VC-1 thread elapsed time: %lld us\n", elapsed_us);
 
     pthread_exit(nullptr);
 }
@@ -452,14 +475,14 @@ void *vc_2_thread_handler(void *arg)
 
     timespec start_time{};
     clock_gettime(clock_id, &start_time);
-
     vc2_result = approxvc2();
 
     timespec end_time{};
     clock_gettime(clock_id, &end_time);
 
     long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
-    printf("VC-2 thread elapsed time: %lld us\n", elapsed_us);
+    // printf("%lld\n", elapsed_us);
+    //printf("VC-2 thread elapsed time: %lld us\n", elapsed_us);
 
     pthread_exit(nullptr);
 }
@@ -478,9 +501,45 @@ void *refined_vc_2_thread_handler(void *arg)
     clock_gettime(clock_id, &end_time);
 
     long long elapsed_us = (end_time.tv_sec - start_time.tv_sec) * 1000000LL + (end_time.tv_nsec - start_time.tv_nsec) / 1000LL;
-    printf("REFINED-VC-2 thread elapsed time: %lld us\n", elapsed_us);
-
+    //printf("REFINED-VC-2 thread elapsed time: %lld us\n", elapsed_us);
+     //printf("%lld\n", elapsed_us);
     pthread_exit(nullptr);
+}
+
+void cnf_timeout_watcher(pthread_t thread_id, int time_limit)
+{
+    clockid_t cid;
+    pthread_getcpuclockid(thread_id, &cid);
+    struct timespec tspec;
+
+    while (cnf_thread_status)
+    {
+        clock_gettime(cid, &tspec);
+        if (tspec.tv_sec >= time_limit)
+        {
+            cout << "CNF-SAT-VC: timeout" << endl;
+            cnf_thread_timeout = true;
+            return;
+        }
+    }
+}
+
+void cnf_3_timeout_watcher(pthread_t thread_id, int time_limit)
+{
+    clockid_t cid;
+    pthread_getcpuclockid(thread_id, &cid);
+    struct timespec tspec;
+
+    while (cnf_3_thread_status)
+    {
+        clock_gettime(cid, &tspec);
+        if (tspec.tv_sec >= time_limit)
+        {
+            cout << "CNF-3-SAT-VC: timeout" << endl;
+            cnf_3_thread_timeout = true;
+            return;
+        }
+    }
 }
 
 void *input_output_thread_handler(void *arg) {
@@ -511,6 +570,9 @@ void *input_output_thread_handler(void *arg) {
             pthread_create(&vc_2_thread, nullptr, &vc_2_thread_handler, nullptr);
             pthread_create(&refined_vc_2_thread, nullptr, &refined_vc_2_thread_handler, nullptr);
 
+            cnf_timeout_watcher(cnf_thread, 5);
+            cnf_3_timeout_watcher(cnf_3_thread, 5);
+
             pthread_join(cnf_thread, nullptr);
             pthread_join(cnf_3_thread, nullptr);
             pthread_join(vc_1_thread, nullptr);
@@ -518,10 +580,24 @@ void *input_output_thread_handler(void *arg) {
             pthread_join(vc_2_thread, nullptr);
             pthread_join(refined_vc_2_thread, nullptr);
 
-            cout << "CNF-SAT-VC: ";
-            print_vector(cnf_result);
-            cout << "CNF-3-SAT-VC: ";
-            print_vector(cnf_3_result);
+        /*    float cnf_num = cnf_result.size();
+            float vc1_num = vc1_result.size();
+            float vc2_num = vc2_result.size();
+            float rvc1_num = refined_vc1_result.size();
+            float rvc2_num = refined_vc2_result.size();
+            float vc1_ratio = vc1_num/cnf_num;
+            float vc2_ratio = vc2_num/cnf_num;
+            float rvc1_ratio = rvc1_num/cnf_num;
+            float rvc2_ratio = rvc2_num/cnf_num;*/
+            if(!cnf_thread_timeout){
+                cout << "CNF-SAT-VC: ";
+                print_vector(cnf_result);
+            }
+
+            if(!cnf_3_thread_timeout){
+                cout << "CNF-3-SAT-VC: ";
+                print_vector(cnf_3_result);
+            }
             cout << "APPROX-VC-1: ";
             print_set(vc1_result);
             cout << "APPROX-VC-2: ";
@@ -530,7 +606,12 @@ void *input_output_thread_handler(void *arg) {
             print_set(refined_vc1_result);
             cout << "REFINED-APPROX-VC-2: ";
             print_vector(refined_vc2_result);
-
+            /*cout << vc1_ratio << endl;
+            cout << vc2_ratio << endl;
+            cout << rvc1_ratio << endl;
+            cout << "rvc2_ratio: " << rvc2_ratio << endl;*/
+            cnf_thread_timeout = false;
+            cnf_3_thread_timeout = false;
         }
     }
     return nullptr;
