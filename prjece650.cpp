@@ -561,57 +561,61 @@ void *input_output_thread_handler(void *arg) {
         if (initial == "E") {
             string coordinate;
             split >> coordinate;
-            get_edges(coordinate);
+            if(coordinate == "{}")
+                cout << "";
+            else{
+                get_edges(coordinate);
 
-            pthread_create(&cnf_thread, nullptr, &cnf_thread_handler, nullptr);
-            pthread_create(&cnf_3_thread, nullptr, &cnf_3_thread_handler, nullptr);
-            pthread_create(&vc_1_thread, nullptr, &vc_1_thread_handler, nullptr);
-            pthread_create(&refined_vc_1_thread, nullptr, &refined_vc_1_thread_handler, nullptr);
-            pthread_create(&vc_2_thread, nullptr, &vc_2_thread_handler, nullptr);
-            pthread_create(&refined_vc_2_thread, nullptr, &refined_vc_2_thread_handler, nullptr);
+                pthread_create(&cnf_thread, nullptr, &cnf_thread_handler, nullptr);
+                pthread_create(&cnf_3_thread, nullptr, &cnf_3_thread_handler, nullptr);
+                pthread_create(&vc_1_thread, nullptr, &vc_1_thread_handler, nullptr);
+                pthread_create(&refined_vc_1_thread, nullptr, &refined_vc_1_thread_handler, nullptr);
+                pthread_create(&vc_2_thread, nullptr, &vc_2_thread_handler, nullptr);
+                pthread_create(&refined_vc_2_thread, nullptr, &refined_vc_2_thread_handler, nullptr);
 
-            cnf_timeout_watcher(cnf_thread, 5);
-            cnf_3_timeout_watcher(cnf_3_thread, 5);
+                cnf_timeout_watcher(cnf_thread, 5);
+                cnf_3_timeout_watcher(cnf_3_thread, 5);
 
-            pthread_join(cnf_thread, nullptr);
-            pthread_join(cnf_3_thread, nullptr);
-            pthread_join(vc_1_thread, nullptr);
-            pthread_join(refined_vc_1_thread, nullptr);
-            pthread_join(vc_2_thread, nullptr);
-            pthread_join(refined_vc_2_thread, nullptr);
+                pthread_join(cnf_thread, nullptr);
+                pthread_join(cnf_3_thread, nullptr);
+                pthread_join(vc_1_thread, nullptr);
+                pthread_join(refined_vc_1_thread, nullptr);
+                pthread_join(vc_2_thread, nullptr);
+                pthread_join(refined_vc_2_thread, nullptr);
 
-        /*    float cnf_num = cnf_result.size();
-            float vc1_num = vc1_result.size();
-            float vc2_num = vc2_result.size();
-            float rvc1_num = refined_vc1_result.size();
-            float rvc2_num = refined_vc2_result.size();
-            float vc1_ratio = vc1_num/cnf_num;
-            float vc2_ratio = vc2_num/cnf_num;
-            float rvc1_ratio = rvc1_num/cnf_num;
-            float rvc2_ratio = rvc2_num/cnf_num;*/
-            if(!cnf_thread_timeout){
-                cout << "CNF-SAT-VC: ";
-                print_vector(cnf_result);
+                /*    float cnf_num = cnf_result.size();
+                    float vc1_num = vc1_result.size();
+                    float vc2_num = vc2_result.size();
+                    float rvc1_num = refined_vc1_result.size();
+                    float rvc2_num = refined_vc2_result.size();
+                    float vc1_ratio = vc1_num/cnf_num;
+                    float vc2_ratio = vc2_num/cnf_num;
+                    float rvc1_ratio = rvc1_num/cnf_num;
+                    float rvc2_ratio = rvc2_num/cnf_num;*/
+                if(!cnf_thread_timeout){
+                    cout << "CNF-SAT-VC: ";
+                    print_vector(cnf_result);
+                }
+
+                if(!cnf_3_thread_timeout){
+                    cout << "CNF-3-SAT-VC: ";
+                    print_vector(cnf_3_result);
+                }
+                cout << "APPROX-VC-1: ";
+                print_set(vc1_result);
+                cout << "APPROX-VC-2: ";
+                print_vector(vc2_result);
+                cout << "REFINED-APPROX-VC-1: ";
+                print_set(refined_vc1_result);
+                cout << "REFINED-APPROX-VC-2: ";
+                print_vector(refined_vc2_result);
+                /*cout << vc1_ratio << endl;
+                cout << vc2_ratio << endl;
+                cout << rvc1_ratio << endl;
+                cout << "rvc2_ratio: " << rvc2_ratio << endl;*/
+                cnf_thread_timeout = false;
+                cnf_3_thread_timeout = false;
             }
-
-            if(!cnf_3_thread_timeout){
-                cout << "CNF-3-SAT-VC: ";
-                print_vector(cnf_3_result);
-            }
-            cout << "APPROX-VC-1: ";
-            print_set(vc1_result);
-            cout << "APPROX-VC-2: ";
-            print_vector(vc2_result);
-            cout << "REFINED-APPROX-VC-1: ";
-            print_set(refined_vc1_result);
-            cout << "REFINED-APPROX-VC-2: ";
-            print_vector(refined_vc2_result);
-            /*cout << vc1_ratio << endl;
-            cout << vc2_ratio << endl;
-            cout << rvc1_ratio << endl;
-            cout << "rvc2_ratio: " << rvc2_ratio << endl;*/
-            cnf_thread_timeout = false;
-            cnf_3_thread_timeout = false;
         }
     }
     return nullptr;
