@@ -618,10 +618,10 @@ void *input_output_thread_handler(void *arg) {
 }
 
 int main() {
-    int retcode;
+    int main_thread;
     pthread_create(&io_thread, nullptr, &input_output_thread_handler, nullptr);
-    retcode = pthread_join(io_thread, nullptr);
-    if (retcode){
+    main_thread = pthread_join(io_thread, nullptr);
+    if (main_thread){
         return 0;
     }
 }
