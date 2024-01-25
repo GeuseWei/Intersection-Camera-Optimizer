@@ -1,0 +1,17 @@
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/prjece650.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/edit_cache.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/rebuild_cache.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/list_install_components.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/install.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/install/local.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/CMakeFiles/install/strip.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/minisat-lib-static.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/minisat-lib-shared.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/minisat_core.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/minisat_simp.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/edit_cache.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/rebuild_cache.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/list_install_components.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/install.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/install/local.dir
+/Users/geuse/Desktop/650project/mmz529/cmake-build-local/minisat/CMakeFiles/install/strip.dir

@@ -1,0 +1,10 @@
+# ninja log v5
+10	392	1680646802449708848	minisat/CMakeFiles/minisat-lib-static.dir/minisat/utils/System.cc.o	8cf4c036f212374
+9	412	1680646802469471510	minisat/CMakeFiles/minisat-lib-static.dir/minisat/utils/Options.cc.o	83b9839a06ef9eea
+1879	2049	1680646804107452311	prjece650	20da016d65626e07
+9	1879	1680646803935184588	CMakeFiles/prjece650.dir/prjece650.cpp.o	c9b898965b4e0fc5
+10	655	1680646802713829463	minisat/CMakeFiles/minisat-lib-static.dir/minisat/simp/SimpSolver.cc.o	fc5a25cc3b0d4636
+712	785	1680646802851373000	minisat/libminisat.a	770a5d950c85421e
+10	712	1680646802770470649	minisat/CMakeFiles/minisat-lib-static.dir/minisat/core/Solver.cc.o	718bf8cda031d3e9
+10	1527	1680840342213193547	CMakeFiles/prjece650.dir/prjece650.cpp.o	c9b898965b4e0fc5
+1528	1641	1680840342334123560	prjece650	20da016d65626e07

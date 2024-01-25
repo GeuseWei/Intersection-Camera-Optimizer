@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="prjece650"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\minisat\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="prjece650">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/prjece650" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 prjece650"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="prjece650/fast">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/prjece650" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 prjece650/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat_simp">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/minisat" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat_simp"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat_simp/fast">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/minisat" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat_simp/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat_core">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/minisat_core" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat_core"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat_core/fast">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/minisat_core" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat_core/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat-lib-shared">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/libminisat.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat-lib-shared"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat-lib-shared/fast">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/libminisat.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat-lib-shared/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat-lib-static">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/libminisat.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat-lib-static"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minisat-lib-static/fast">
+				<Option output="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/libminisat.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D__STDC_FORMAT_MACROS"/>
+					<Add option="-D__STDC_LIMIT_MACROS"/>
+					<Add directory="/home/z29wei/mmz529/minisat"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 minisat-lib-static/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/z29wei/mmz529/cmake-build-debug-eceubuntu/minisat/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/core/Main.cc">
+			<Option target="minisat_core"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/core/Solver.cc">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/core/Solver.h">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/simp/Main.cc">
+			<Option target="minisat_simp"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/simp/SimpSolver.cc">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/simp/SimpSolver.h">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/utils/Options.cc">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/utils/Options.h">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/utils/System.cc">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/minisat/utils/System.h">
+			<Option target="minisat-lib-shared"/>
+			<Option target="minisat-lib-static"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/prjece650.cpp">
+			<Option target="prjece650"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/z29wei/mmz529/minisat/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\minisat\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

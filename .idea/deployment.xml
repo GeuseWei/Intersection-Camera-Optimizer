@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="eceubuntu (8525d06e-8661-48b7-9317-5ecaa7fd4563)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/mmz529" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-local" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-eceubuntu" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
